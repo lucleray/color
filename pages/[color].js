@@ -1,4 +1,4 @@
-export { getStaticPaths, getStaticProps } from '../lib/get-hex-colors-max-paths'
+export { getStaticPaths, getStaticProps } from '../lib/get-hex-colors-paths'
 
 export default function ColorPage({ color }) {
   return (
