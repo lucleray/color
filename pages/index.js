@@ -1,10 +1,17 @@
 import Link from 'next/link'
-import { useReducer } from 'react'
-
-import { getRandomColor } from '../lib/get-hex-colors-paths'
+import React from 'react'
+import { getColorFromInt, TOTAL_COLORS } from '../lib'
 
 export default function IndexPage() {
-  const [color, shuffle] = useReducer(getRandomColor, null, getRandomColor)
+  function getRandomColor() {
+    return getColorFromInt(Math.floor(Math.random() * TOTAL_COLORS))
+  }
+
+  const [color, shuffle] = React.useReducer(
+    getRandomColor,
+    null,
+    getRandomColor
+  )
 
   return (
     <div>
