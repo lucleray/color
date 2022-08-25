@@ -11,7 +11,10 @@ export function getStaticPaths() {
 }
 
 export function getStaticProps({ params }) {
-  return { props: { color: params.color } }
+  return {
+    props: { color: params.color },
+    revalidate: 10,
+  }
 }
 
 export default function ColorPage({ color }) {
