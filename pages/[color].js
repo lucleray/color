@@ -7,7 +7,7 @@ export function getStaticPaths() {
     paths.push({ params: { color: getColorFromInt(i) } })
   }
 
-  return { paths, fallback: false }
+  return { paths }
 }
 
 export function getStaticProps({ params }) {
