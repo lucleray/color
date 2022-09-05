@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { COLOR_LIST } from '../lib/color-list'
 
 export function getServerSideProps({ params, res }) {
@@ -26,17 +27,28 @@ export function getServerSideProps({ params, res }) {
     return { props: { color: `#${colorListColor}` } }
   }
 
+  res.statusCode = 404
   return { props: {} }
 }
 
 export default function ColorPage({ color }) {
   if (!color) {
     return (
-      <div style={{ width: '100%', height: '100vh', background: '#000' }} />
+      <>
+        <Head>
+          <title>Not found</title>
+        </Head>
+        <div style={{ width: '100%', height: '100vh', background: '#000' }} />
+      </>
     )
   }
 
   return (
-    <div style={{ width: '100%', height: '100vh', background: `${color}` }} />
+    <>
+      <Head>
+        <title>{color}</title>
+      </Head>
+      <div style={{ width: '100%', height: '100vh', background: `${color}` }} />
+    </>
   )
 }
