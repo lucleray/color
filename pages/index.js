@@ -1,22 +1,22 @@
 import Link from 'next/link'
 import React from 'react'
-import { getColorFromInt, TOTAL_COLORS } from '../lib'
 
-export default function IndexPage() {
-  function getRandomColor() {
-    return getColorFromInt(Math.floor(Math.random() * TOTAL_COLORS))
-  }
+function getRandomColor() {
+  const i = Math.floor(Math.random() * Math.pow(16, 6))
+  return Number(i).toString(16).padStart(6, '0').slice(-6)
+}
 
-  const [color, shuffle] = React.useReducer(
-    getRandomColor,
-    null,
-    getRandomColor
-  )
+export function getServerSideProps() {
+  return { props: { color: getRandomColor() } }
+}
+
+export default function IndexPage({ color }) {
+  const [colorState, shuffle] = React.useReducer(getRandomColor, color)
 
   return (
     <div>
-      <Link href={`/${color}`}>
-        <a>#{color}</a>
+      <Link href={`/${colorState}`}>
+        <a>#{colorState}</a>
       </Link>{' '}
       - <button onClick={shuffle}>Shuffle</button>
     </div>
