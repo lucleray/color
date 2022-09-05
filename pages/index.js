@@ -7,18 +7,32 @@ function getRandomColor() {
 }
 
 export function getServerSideProps() {
-  return { props: { color: getRandomColor() } }
+  const colors = []
+  for (let i = 0; i < 1_000; i++) {
+    colors.push(getRandomColor())
+  }
+
+  return { props: { colors } }
 }
 
-export default function IndexPage({ color }) {
-  const [colorState, shuffle] = React.useReducer(getRandomColor, color)
-
+export default function IndexPage({ colors }) {
   return (
     <div>
-      <Link href={`/${colorState}`}>
-        <a>#{colorState}</a>
-      </Link>{' '}
-      - <button onClick={shuffle}>Shuffle</button>
+      {colors.map((color) => (
+        <Link href={`/${color}`}>
+          <a
+            style={{
+              width: 100,
+              height: 100,
+              display: 'block',
+              background: `#${color}`,
+              margin: 0,
+              padding: 0,
+              float: 'left',
+            }}
+          ></a>
+        </Link>
+      ))}
     </div>
   )
 }
