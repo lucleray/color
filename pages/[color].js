@@ -1,19 +1,12 @@
 import { COLOR_LIST } from '../lib/color-list'
 
-export function getServerSideProps({ req, res }) {
+export function getServerSideProps({ params, res }) {
   res.setHeader(
     'Cache-Control',
     'public, s-maxage=31536000, max-age=86400: 31536000, immutable'
   )
 
-  let color
-
-  if (req.url && req.url[0] === '/') {
-    color = req.url
-      .slice(1)
-      .toLowerCase()
-      .replace(/[\-._]/g, '')
-  }
+  let color = (params.color || '').toLowerCase().replace(/[\-._]/g, '')
 
   // short hexadecimal color (eg. fff)
   const smallHexRegex = /^[A-Fa-f0-9]{3}$/
