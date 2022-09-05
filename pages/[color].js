@@ -3,7 +3,7 @@ import { COLOR_LIST } from '../lib/color-list'
 export function getServerSideProps({ req, res }) {
   res.setHeader(
     'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
+    'public, s-maxage=31536000, max-age=86400: 31536000, immutable'
   )
 
   let color
