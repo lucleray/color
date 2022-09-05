@@ -31,6 +31,11 @@ export function getServerSideProps({ params, res }) {
   return { props: {} }
 }
 
+function getFavicon(color) {
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'><circle cx='5' cy='5' r='6' fill='${color}' /></svg>`
+  return encodeURIComponent(svg)
+}
+
 export default function ColorPage({ color }) {
   if (!color) {
     return (
@@ -47,6 +52,7 @@ export default function ColorPage({ color }) {
     <>
       <Head>
         <title>{color}</title>
+        <link rel="icon" href={`data:image/svg+xml,${getFavicon(color)}`} />
       </Head>
       <div style={{ width: '100%', height: '100vh', background: `${color}` }} />
     </>

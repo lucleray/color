@@ -16,11 +16,26 @@ export function getServerSideProps() {
   return { props: { colors } }
 }
 
+function getFavicon(colors) {
+  const mask = `<mask id="myMask"><circle cx='5' cy='5' r='6' fill='white'/></mask>`
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'>${mask}<g mask='url(#myMask)'>${colors
+    .slice(0, 100)
+    .map(
+      (color, i) =>
+        `<rect x='${i % 10}' y='${Math.floor(
+          i / 10
+        )}' width='1' height='1' fill='#${color}'/>`
+    )
+    .join('')}</g></svg>`
+  return encodeURIComponent(svg)
+}
+
 export default function IndexPage({ colors }) {
   return (
     <>
       <Head>
         <title>Colorrrrr</title>
+        <link rel="icon" href={`data:image/svg+xml,${getFavicon(colors)}`} />
       </Head>
       {colors.map((color) => (
         <Link href={`/${color}`}>
