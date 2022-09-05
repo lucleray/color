@@ -17,10 +17,14 @@ export function getServerSideProps() {
 
 export default function IndexPage({ colors }) {
   return (
-    <div>
+    <>
+      <Head>
+        <title>Colorrrrr</title>
+      </Head>
       {colors.map((color) => (
         <Link href={`/${color}`}>
           <a
+            aria-label={`Color #${color}`}
             style={{
               width: 100,
               height: 100,
@@ -33,6 +37,6 @@ export default function IndexPage({ colors }) {
           ></a>
         </Link>
       ))}
-    </div>
+    </>
   )
 }
